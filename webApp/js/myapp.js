@@ -15,15 +15,14 @@ function initialize() {
 
 
 function getToken() {
-/*
-  $.get("http://" + window.location.host + ":5000/api/token", function(accessToken) {
-    var options = {};
-    options.accessToken = accessToken;
-console.log(accessToken);
-return accessToken;
-*/
+  /*  
+  $.get("http://" + window.location.host + ':5000/api/token', function (accessToken){
+    options.accessToken (responseText); 
+  });
+  return accessToken;
+  */
   return "AaBUsx35j2MY6rtAmyiXlvX84nqp";
-}
+}  
 
 
 function loadDocument(viewer, documentId) {  
