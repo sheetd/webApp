@@ -1,0 +1,29 @@
+/* Reset Browswer Defaults */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: white;
+}
+
+
+/* General */
+.frame {
+	font-family:verdana; 
+	font-size: 24px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+/* Navigation Bar */
+.frame li {
+    display: inline;
+}
+
+.frame li a {
+    color: blue;
+}
+
+.frame li a:hover {
+    background-color: green;
+}
