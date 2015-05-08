@@ -5,8 +5,11 @@ function initialize() {
     "getAccessToken" : getToken,
     "refreshToken" : getToken
   };
-  var viewerElement = document.getElementById('viewer');
-  var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {});
+  var viewerElement = document.getElementById('viewer'); // go to html
+  
+  //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {});
+  var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); 
+  
   Autodesk.Viewing.Initializer(options,function() {
     viewer.initialize();
     loadDocument(viewer, options.document);
@@ -15,7 +18,7 @@ function initialize() {
 
 
 function getToken() {
-  var theUrl = "http://app.sheetd.com:5000/auth"; // change this when deploying
+  var theUrl = "http://app.sheetd.com:5000/auth";
   var xmlHttp = null;
   xmlHttp =new XMLHttpRequest();
   xmlHttp.open("GET", theUrl, false);
