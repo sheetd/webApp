@@ -13,6 +13,7 @@ function initialize() {
   });
 }
 
+
 function getToken() {
   var theUrl = "http://app.sheetd.com:5000/auth"; // change this when deploying
   var xmlHttp = null;
@@ -22,13 +23,6 @@ function getToken() {
   var resp =  JSON.parse(xmlHttp.responseText);
   var token = resp["access_token"];
   return token;
-  /*  
-  $.get("http://" + window.location.host + ':5000/api/token', function (accessToken){
-    options.accessToken (responseText); 
-  });
-  return accessToken;
-  //return "3umyBC38XmmS0iCqln0zQSzGfBNy";
-  */
 }  
 
 
