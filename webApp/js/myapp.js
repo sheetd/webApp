@@ -5,10 +5,9 @@ function initialize() {
     "getAccessToken" : getToken,
     "refreshToken" : getToken
   };
-  var viewerElement = document.getElementById('viewer'); // go to html
+  var viewerElement = document.getElementById('viewer');
   
-  //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {});
-  var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); 
+  var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {});
   
   Autodesk.Viewing.Initializer(options,function() {
     viewer.initialize();
