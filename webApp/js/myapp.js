@@ -5,7 +5,7 @@ function initialize() {
     "getAccessToken" : getToken,
     "refreshToken" : getToken
   };
-  var viewerElement = document.getElementById('viewer');
+  var viewerElement = document.getElementById("viewer");
   
   var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {});
   
@@ -17,9 +17,9 @@ function initialize() {
 
 
 function getToken() {
-  var theUrl = "http://app.sheetd.com:5000/auth";
+  var theUrl = "http://" + location.hostname + ":5000/auth";
   var xmlHttp = null;
-  xmlHttp =new XMLHttpRequest();
+  xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", theUrl, false);
   xmlHttp.send(null);
   var resp =  JSON.parse(xmlHttp.responseText);
