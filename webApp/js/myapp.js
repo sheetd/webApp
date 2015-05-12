@@ -1,6 +1,6 @@
 function initialize() {
   var options = {
-    "document" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=",
+    "document": "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ=",
     "env" : "AutodeskProduction",
     "getAccessToken" : getToken,
     "refreshToken" : getToken
@@ -14,7 +14,6 @@ function initialize() {
     loadDocument(viewer, options.document);
   });
 }
-
 
 function getToken() {
   //var theUrl = "http://" + location.hostname + ":5000/auth";
