@@ -17,7 +17,8 @@ function initialize() {
 
 
 function getToken() {
-  var theUrl = "http://" + location.hostname + ":5000/auth";
+  //var theUrl = "http://" + location.hostname + ":5000/auth";
+  var theUrl = "http://app.sheetd.com:5000/auth";
   var xmlHttp = null;
   xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", theUrl, false);
@@ -26,7 +27,6 @@ function getToken() {
   var token = resp["access_token"];
   return token;
 }  
-
 
 function loadDocument(viewer, documentId) {  
   // Find the first 3d geometry and load that.
