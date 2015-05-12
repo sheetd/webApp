@@ -28,7 +28,7 @@
 .nav a {
 	background: lightslategray;
 	text-decoration: none;
-	text-color: black;
+	color: black;
 }
 
 .nav a:hover {
