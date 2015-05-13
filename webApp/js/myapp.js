@@ -1,16 +1,3 @@
-function testFunction() {
-    // Put model data in an array (eventual database/JSON connection)
-    "models" : [
-        {"modelName" : "BAMPFA Panel", "modelURN" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},
-        {"modelName": "D-SET Panel", "modelURN": "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}
-    ]
-
-    // Parse array and write to console
-    var modelStatus = JSON.parse(models);
-    modelStatus.models[0].modelName + " , " + modelStatus.models[0].modelURN;
-    console.log("Model Status: " + modelStatus);
-}
-
 function initialize() {
     var options = {
         //"document" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ=", // BAMPFA Panel
@@ -55,4 +42,17 @@ function loadDocument(viewer, documentId) {
     }, function(errorMsg) {// onErrorCallback
         alert("Load Error: " + errorMsg);
     });
+}
+
+function testFunction() {
+    // Put model data in an array (eventual database/JSON connection)
+    var models = [
+        {"modelName" : "BAMPFA Panel", "modelURN" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},
+        {"modelName": "D-SET Panel", "modelURN": "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}
+    ]
+
+    // Parse array and write to console
+    var modelStatus = JSON.parse(models);
+    modelStatus.models[0].modelName + " , " + modelStatus.models[0].modelURN;
+    console.log("Model Status: " + modelStatus);
 }
