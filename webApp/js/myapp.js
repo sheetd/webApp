@@ -1,6 +1,7 @@
 function initialize() {
   var options = {
-    "document": "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ=",
+    //"document" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ=", // BAMPFA Panel
+    "document" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=", // D-SET Panel
     "env" : "AutodeskProduction",
     "getAccessToken" : getToken,
     "refreshToken" : getToken
@@ -16,7 +17,6 @@ function initialize() {
 }
 
 function getToken() {
-  //var theUrl = "http://" + location.hostname + ":5000/auth";
   var theUrl = "http://app.sheetd.com:5000/auth";
   var xmlHttp = null;
   xmlHttp = new XMLHttpRequest();
