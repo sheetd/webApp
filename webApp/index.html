@@ -29,8 +29,15 @@
     <div id="nav" class="nav">
       <ul>
         <li>3D Web Application</li>
-        <li><a href="">Option 1</a></li>
-        <li><a href="">Option 2</a></li>
+        <li><a href="">Button 1</a></li>
+        <li><a href="">Button 2</a></li>
+        <li>
+          <select id="modelNumberDropdown" onchange="getModelInt(modelNumberDropdown);">
+            <option>Model 1</option>
+            <option>Model 2</option>
+            <option>Model 3</option>
+          </select>
+        </li>
       </ul>
     </div>
     <div id="viewer"></div>
