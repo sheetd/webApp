@@ -1,3 +1,7 @@
+// Load Model 3D Viewer
+//
+// 
+
 function initialize() {
     // Initialize 3d viewer
     var options = {
@@ -26,7 +30,7 @@ function initialize() {
 }
 
 function getToken() {
-    var theUrl = "http://app.sheetd.com:5000/auth";
+    var theUrl = "http://" + location.hostname + ":5000/auth";
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
     // new jQuery based method here?
@@ -70,19 +74,25 @@ function getModelInt() {
 function selectDocument() {
     // Model Data JSON (eventual database connection...)
     var models = '{ "models" : [' +
-        '{"modelName":"BAMPFA Panel","modelURN":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},' +
-        '{"modelName":"D-SET Panel","modelURN":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
+        '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},' +
+        '{"label":"D-SET Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
 
     // Parse array and output URN
     var modelStatus = JSON.parse(models);
     var int = getModelInt()
-    
-    var name = modelStatus.models[int].modelName;
+
+    var name = modelStatus.models[int].label;
     console.log("--> modelName: " + name)
     
-    var urn = modelStatus.models[int].modelURN;
+    var urn = modelStatus.models[int].urn;
     console.log("--> modelURN: " + urn);
-    
+
+    // Model Data Array
+//    var models = [
+//        {label : "BAMPFA Panel" , urn : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},
+//        {label : "D-SET Panel" , urn : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}        
+//    ]
+
     return urn;
 }
 

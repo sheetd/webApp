@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>3D Viewer Sample</title>
-    <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8">
     <!-- Autodesk Viewer (from server: PROD) -->
     <link
@@ -23,7 +22,8 @@
       ga('send', 'pageview');
     </script>
     <!-- This app includes -->
-    <script src="js/myapp.js"></script> 
+    <script src="js/LoadModel.js"></script>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body onload="initialize()">  
     <div id="nav" class="nav">
@@ -31,7 +31,7 @@
         <li>3D Web Application</li>
         <li><a href="">Button 1</a></li>
         <li><a href="">Button 2</a></li>
-        <li>
+        <li>Model Selection
           <select id="modelNumberDropdown" onchange="getModelInt(modelNumberDropdown);"</select>>
             <option value=0>Model A</option>
             <option value=1>Model B</option>
