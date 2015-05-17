@@ -16,12 +16,12 @@ function initialize() {
     });
     
     // Testing
-    testFunction();
+    //testFunction();
     
-    // Set viewer background
+    // TO DO: Set viewer background
     viewer.impl.setLightPreset(8)
     
-    // Insert the toolbar
+    // TO DO: Insert the toolbar
     viewer.getToolbar(true)
 }
 
@@ -55,7 +55,7 @@ function loadDocument(viewer, documentId) {
 
 function testFunction() {
     // Send string to the console
-    testFunction.option1 = "Test Function Works";
+    testFunction.option1 = "--> Test Function";
     console.log(testFunction.option1);
 }
 
@@ -63,26 +63,29 @@ function getModelInt() {
     // Pull model # from pulldown
     var e = document.getElementById("modelNumberDropdown");
     var modelInt = e.options[e.selectedIndex].value;
-    console.log("Model # Selected: " + modelInt);
+    console.log("--> modelInt: " + modelInt);
     return modelInt;
 }
 
 function selectDocument() {
-    // Put model data in an array (eventual database connection...)
-    var models = [
-        {"modelName" : "BAMPFA Panel", "modelURN" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},
-        {"modelName" : "D-SET Panel", "modelURN" : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}
-    ]
+    // Model Data JSON (eventual database connection...)
+    var models = '{ "models" : [' +
+        '{"modelName":"BAMPFA Panel","modelURN":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},' +
+        '{"modelName":"D-SET Panel","modelURN":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
+
+    // Parse array and output URN
+    var modelStatus = JSON.parse(models);
+    var int = getModelInt()
     
-    // Select model # from dropdown list
-    getModelInt()
-
-    // TO DO: Parse array and output URN
-    //modelStatus = JSON.parse(models);
-    //modelStatus.models[0].modelName + " , " + modelStatus.models[0].modelURN;
-    //console.log("Model Status: " + modelStatus);
-
-    // Outputs the URN
-    var urn = "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=";
+    var name = modelStatus.models[int].modelName;
+    console.log("--> modelName: " + name)
+    
+    var urn = modelStatus.models[int].modelURN;
+    console.log("--> modelURN: " + urn);
+    
     return urn;
+}
+
+function refresh3d() {
+    // TO DO
 }
