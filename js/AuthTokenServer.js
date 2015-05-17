@@ -81,14 +81,14 @@ app.get("/auth", function(req, res) {
 app.get("/auth-stg", function(req, res) {
     console.log("AuthTokenServer: getting STAGING token...");
         // ***** PUT YOUR STAGING KEYS HERE *****
-    getAuthCode(res, "developer-stg.api.autodesk.com", "MyConsumerKey", "MyConsumerSecret");
+    getAuthCode(res, "developer-stg.api.autodesk.com", "xeRR1fXOYBQAda23xJOkGzLyUrtMEOBP", "MCCEXXeWCHEyRQfN");
 });
 
 app.get("/auth-dev", function(req, res) {
         // need endpoint and keys for DEV
     console.log("AuthTokenServer: getting DEV token...");
         // ***** PUT YOUR DEV KEYS HERE *****
-    getAuthCode(res, "developer-dev.api.autodesk.com", "MyConsumerKey", "MyConsumerSecret");
+    getAuthCode(res, "developer-dev.api.autodesk.com", "xeRR1fXOYBQAda23xJOkGzLyUrtMEOBP", "MCCEXXeWCHEyRQfN");
 });
 
 // test route to make sure everything is working
@@ -97,4 +97,3 @@ app.get("/", function(req, res) {
 });
 
 app.listen(process.env.PORT || 5000);
-
