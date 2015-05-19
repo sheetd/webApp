@@ -1,11 +1,12 @@
+// 
 // Load Model 3D Viewer
 //
-// 
+
 
 function initialize() {
     // Initialize 3d viewer
     var options = {
-        "document" : selectDocument(),
+        "document" : setModel(),
         "env" : "AutodeskProduction",
         "getAccessToken" : getToken,
         "refreshToken": getToken
@@ -63,39 +64,23 @@ function testFunction() {
     console.log(testFunction.option1);
 }
 
-function getModelInt() {
+function setModel(modelInt) {
     // Pull model # from pulldown
     var e = document.getElementById("modelNumberDropdown");
     var modelInt = e.options[e.selectedIndex].value;
     console.log("--> modelInt: " + modelInt);
-    return modelInt;
-}
-
-function selectDocument() {
+    
     // Model Data JSON (eventual database connection...)
     var models = '{ "models" : [' +
-        '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},' +
-        '{"label":"D-SET Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
+        '{"label":"D-SET Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="},' +
+        '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ"}]}';
 
-    // Parse array and output URN
+    // Parse model list and output URN
     var modelStatus = JSON.parse(models);
-    var int = getModelInt()
-
-    var name = modelStatus.models[int].label;
-    console.log("--> modelName: " + name)
+    var name = modelStatus.models[modelInt].label;
+    var urn = modelStatus.models[modelInt].urn;
+    console.log("--> modelName: " + name + "\n" + "--> modelURN: " + urn);
     
-    var urn = modelStatus.models[int].urn;
-    console.log("--> modelURN: " + urn);
-
-    // Model Data Array
-//    var models = [
-//        {label : "BAMPFA Panel" , urn : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="},
-//        {label : "D-SET Panel" , urn : "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}        
-//    ]
-
+    // TO DO: refresh 3d
     return urn;
-}
-
-function refresh3d() {
-    // TO DO
 }
