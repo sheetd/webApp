@@ -2,7 +2,6 @@
 // Load Model 3D Viewer
 //
 
-
 function initialize() {
     // Initialize 3d viewer
     var options = {
@@ -24,12 +23,10 @@ function initialize() {
     // Testing
     //testFunction();
     
-    // TO DO: Set viewer background
-
+    // TO DO: Set viewer background, other options, etc.
 }
 
 function getToken() {
-    // TO DO: new jQuery based method?
     //var theUrl = "http://" + location.hostname + ":5000/auth";//production
     var theUrl = "http://app.sheetd.com:5000/auth";//testing
     var xmlHttp = null;
@@ -38,6 +35,12 @@ function getToken() {
     xmlHttp.send(null);
     var resp =  JSON.parse(xmlHttp.responseText);
     var token = resp["access_token"];
+
+    // TO DO: new jQuery based method
+    //$.get(theUrl, function () {
+    //    console.log("--> token: " + token)
+    //});
+
     return token;
 }  
 
