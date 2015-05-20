@@ -6,15 +6,16 @@
 function initialize() {
     // Initialize 3d viewer
     var options = {
-        "document" : setModel(),
+        "document" : getModel(),
         "env" : "AutodeskProduction",
-        "getAccessToken" : getToken,
-        "refreshToken": getToken
+        "getAccessToken": getToken, //why not getToken(), instead?
+        "refreshToken": getToken 
     };
     
     var viewerElement = document.getElementById("viewer");
-    var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {});
-  
+    //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {}); //default viewer
+    var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); //view with toolbars
+
     Autodesk.Viewing.Initializer(options,function() {
         viewer.initialize();
         loadDocument(viewer, options.document);
@@ -24,17 +25,15 @@ function initialize() {
     //testFunction();
     
     // TO DO: Set viewer background
-    viewer.impl.setLightPreset(8)
-    
-    // TO DO: Insert the toolbar
-    viewer.getToolbar(true)
+
 }
 
 function getToken() {
-    var theUrl = "http://" + location.hostname + ":5000/auth";
+    // TO DO: new jQuery based method?
+    //var theUrl = "http://" + location.hostname + ":5000/auth";//production
+    var theUrl = "http://app.sheetd.com:5000/auth";//testing
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
-    // new jQuery based method here?
     xmlHttp.open("GET", theUrl, false);
     xmlHttp.send(null);
     var resp =  JSON.parse(xmlHttp.responseText);
@@ -64,23 +63,22 @@ function testFunction() {
     console.log(testFunction.option1);
 }
 
-function setModel(modelInt) {
+function getModel() {
     // Pull model # from pulldown
-    var e = document.getElementById("modelNumberDropdown");
+    var e = document.getElementById("modelDropdown");
     var modelInt = e.options[e.selectedIndex].value;
-    console.log("--> modelInt: " + modelInt);
+
+    // TO DO: Populate pulldown from JSON list
     
-    // Model Data JSON (eventual database connection...)
+    // Model Data JSON (eventual database connection or external JSON file)
     var models = '{ "models" : [' +
         '{"label":"D-SET Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="},' +
-        '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ"}]}';
+        '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
 
-    // Parse model list and output URN
-    var modelStatus = JSON.parse(models);
-    var name = modelStatus.models[modelInt].label;
-    var urn = modelStatus.models[modelInt].urn;
-    console.log("--> modelName: " + name + "\n" + "--> modelURN: " + urn);
-    
-    // TO DO: refresh 3d
+    // Parse models list and output URN
+    var modelSelection = JSON.parse(models);
+    var name = modelSelection.models[modelInt].label;
+    var urn = modelSelection.models[modelInt].urn;
+    console.log("--> Loading Model" + "\n" + "--> name: " + name + "\n" + "--> urn: " + urn);
     return urn;
 }
