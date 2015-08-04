@@ -11,7 +11,7 @@ function initialize() {
         "refreshToken": getToken 
     };
     
-    var viewerElement = document.getElementById("viewer"); //toolbar viewer
+    var viewerElement = document.getElementById("viewer");
     
     //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {}); //plain viewer
     var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); //viewer with toolbars
