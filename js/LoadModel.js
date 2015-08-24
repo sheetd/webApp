@@ -2,7 +2,6 @@
 // Load Model 3D Viewer
 //
 
-
 function initialize() {
     // Initialize 3d viewer
     var options = {
@@ -13,23 +12,26 @@ function initialize() {
     };
     
     var viewerElement = document.getElementById("viewer");
-    //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {}); //default viewer
-    var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); //view with toolbars
+    
+    //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {}); //plain viewer
+    var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); //viewer with toolbars
 
     Autodesk.Viewing.Initializer(options,function() {
-        viewer.initialize();
-        loadDocument(viewer, options.document);
+        viewer.start();
+        loadDocument(viewer, options.document);        
     });
     
     // Testing
     //testFunction();
     
-    // TO DO: Set viewer background
-
+    // Viewer Extensions testing   
+    viewer.loadExtension("Autodesk.ADN.Viewing.Extension.Basic");
+    
+    // TO DO: Set viewer background, other options, etc.
+    
 }
 
 function getToken() {
-    // TO DO: new jQuery based method?
     //var theUrl = "http://" + location.hostname + ":5000/auth";//production
     var theUrl = "http://app.sheetd.com:5000/auth";//testing
     var xmlHttp = null;
@@ -38,6 +40,12 @@ function getToken() {
     xmlHttp.send(null);
     var resp =  JSON.parse(xmlHttp.responseText);
     var token = resp["access_token"];
+
+    // TO DO: new jQuery based method
+    //$.get(theUrl, function () {
+    //    console.log("--> token: " + token)
+    //});
+
     return token;
 }  
 
