@@ -5,10 +5,10 @@
 function initialize() {
     // Initialize 3d viewer
     var options = {
-        "document" : getModel(),
-        "env" : "AutodeskProduction",
-        "getAccessToken": getToken, //why not getToken(), instead?
-        "refreshToken": getToken 
+        document : getModel(),
+        env : "AutodeskProduction",
+        getAccessToken: getToken, //why not getToken(), instead?
+        refreshToken: getToken
     };
     
     var viewerElement = document.getElementById("viewer");
@@ -54,8 +54,8 @@ function loadDocument(viewer, documentId) {
     Autodesk.Viewing.Document.load(documentId, function(doc) {// onLoadCallback
         var geometryItems = [];
         geometryItems = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
-            "type" : "geometry",
-            "role" : "3d"
+            type : "geometry",
+            role : "3d"
         }, true);
         if (geometryItems.length > 0) {
             viewer.load(doc.getViewablePath(geometryItems[0]));
