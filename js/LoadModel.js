@@ -25,7 +25,7 @@ function initialize() {
     //testFunction();
     
     // Viewer Extensions testing   
-    viewer.loadExtension("Autodesk.ADN.Viewing.Extension.Basic");
+    //viewer.loadExtension("Autodesk.ADN.Viewing.Extension.Basic");
     
     // TO DO: Set viewer background, other options, etc.
 }
@@ -64,12 +64,6 @@ function loadDocument(viewer, documentId) {
     });
 }
 
-function testFunction() {
-    // Send string to the console
-    testFunction.option1 = "--> Test Function";
-    console.log(testFunction.option1);
-}
-
 function getModel() {
     // Pull model # from pulldown
     var e = document.getElementById("modelDropdown");
@@ -91,6 +85,13 @@ function getModel() {
     var urn = modelSelection.models[modelInt].urn;
     console.log("--> Loading Model" + "\n" + "--> name: " + name + "\n" + "--> urn: " + urn);
     return urn;
+}
+
+// Generic test function
+function testFunction() {
+    // Send string to the console
+    testFunction.option1 = "--> Test Function";
+    console.log(testFunction.option1);
 }
 
 // Pull string value from URL
