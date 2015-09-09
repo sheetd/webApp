@@ -1,6 +1,6 @@
-// 
-// Load Model 3D Viewer
-//
+//----------------------------------------------------- 
+// 3D Model Loader
+//----------------------------------------------------- 
 
 function initialize() {
     // Initialize 3d viewer
@@ -18,16 +18,17 @@ function initialize() {
 
     Autodesk.Viewing.Initializer(options, function () {
         viewer.start();
+        
+        // View preferences - 'Riverbank' render seting
+        viewer.impl.setLightPreset(8);
+        
+        // TO DO: additional viewer settings  
+        
         loadDocument(viewer, options.document);
     });
     
     // Testing
     //testFunction();
-    
-    // Viewer Extensions testing   
-    //viewer.loadExtension("Autodesk.ADN.Viewing.Extension.Basic");
-    
-    // TO DO: Set viewer background, other options, etc.
 }
 
 function getToken() {
