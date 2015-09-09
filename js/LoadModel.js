@@ -19,16 +19,14 @@ function initialize() {
     Autodesk.Viewing.Initializer(options, function () {
         viewer.start();
         
-        // View preferences - 'Riverbank' render seting
+        // View preferences - 'Riverbank' render setting
         viewer.impl.setLightPreset(8);
         
         // TO DO: additional viewer settings  
         
         loadDocument(viewer, options.document);
     });
-    
-    // Testing
-    //testFunction();
+
 }
 
 function getToken() {
@@ -67,13 +65,15 @@ function loadDocument(viewer, documentId) {
 
 function getModel() {
     // Pull model # from pulldown
-    var e = document.getElementById("modelDropdown");
-    var modelInt = e.options[e.selectedIndex].value;
-    
+    //var e = document.getElementById("modelDropdown");
+    //var modelInt = e.options[e.selectedIndex].value;
+    var modelInt = 0
+
     // Pull string value from URL (for future use as web service)
-    // http://app.sheetd.com/index.html&urn=1234
+    // http://app.sheetd.com/&urn=1234
     var urlUrn = urlParam("urn");
     console.log("--> urn from URL: " + urlUrn);
+    document.getElementById("urn");
     
     // Model Data JSON (eventual database connection or external JSON file)
     var models = '{ "models" : [' +
