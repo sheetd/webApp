@@ -67,13 +67,12 @@ function getModel() {
     // Pull model # from pulldown
     //var e = document.getElementById("modelDropdown");
     //var modelInt = e.options[e.selectedIndex].value;
-    var modelInt = 0
-
-    // Pull string value from URL (for future use as web service)
-    // http://app.sheetd.com/&urn=1234
-    var urlUrn = urlParam("urn");
-    console.log("--> urn from URL: " + urlUrn);
-    document.getElementById("urn");
+    
+    // Pull string value from URL
+    // http://app.sheetd.com/&part=1234
+    var urlPartNo = urlParam("part");
+    console.log("--> Part Number from URL: " + urlPartNo);
+    document.getElementById("PartNo").innerHTML = urlPartNo; //why is this italic??
     
     // Model Data JSON (eventual database connection or external JSON file)
     var models = '{ "models" : [' +
@@ -81,10 +80,11 @@ function getModel() {
         '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
 
     // Parse models list
+    var modelInt = 0
     var modelSelection = JSON.parse(models);
-    var name = modelSelection.models[modelInt].label;
+    var label = modelSelection.models[modelInt].label;
     var urn = modelSelection.models[modelInt].urn;
-    console.log("--> Loading Model" + "\n" + "--> name: " + name + "\n" + "--> urn: " + urn);
+    console.log("--> Loading Model" + "\n" + "--> label: " + label + "\n" + "--> urn: " + urn);
     return urn;
 }
 

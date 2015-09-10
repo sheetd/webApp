@@ -23,6 +23,10 @@
     padding: 5px;
 }
 
+.nav li:first-child {
+	font-weight: Bold;
+}
+
 .nav a {
 	text-decoration: none;
 	color: black;
@@ -30,7 +34,4 @@
 
 .nav a:hover {
 	color: yellow;
-}
-
-#viewer {
 }
