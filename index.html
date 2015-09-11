@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>3D Viewer Sample</title>
+  <title>3D Viewer</title>
   <!-- Autodesk Viewer (from server: PROD) -->
   <link rel="stylesheet"
-        href="https://developer.api.autodesk.com/viewingservice/v1/viewers/style.css?v=v1.2.18"
+        href="https://developer.api.autodesk.com/viewingservice/v1/viewers/style.css?v=v1.2.16"
         type="text/css">
-  <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/viewer3D.min.js?v=v1.2.18"></script>
+  <script src="https://developer.api.autodesk.com/viewingservice/v1/viewers/viewer3D.min.js?v=v1.2.16"></script>
   <!-- Google Analytics -->
   <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-4001171-4', 'auto');
-      ga('send', 'pageview');
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-4001171-4', 'auto');
+    ga('send', 'pageview');
   </script>
   <!-- External Libs
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -25,15 +27,17 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="initialize()">
-
-  <div id="navLeft" class="nav">
-    <ol>
-      <li>3D Model Viewer</li>
-      <li>ID: <var id="PartNo"></var></li>
-    </ol>
+  <div id="app">
+    <div id="navLeft" class="nav">
+      <ol>
+        <li>3D Viewer</li>
+        <li>Part ID: <span id="id"></span></li>
+      </ol>
+    </div>
+    <div id="window">
+      <div id="viewer3d">
+      </div>
+    </div>
   </div>
-
-  <div id="viewer"></div>
-
 </body>
 </html>

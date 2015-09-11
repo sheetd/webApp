@@ -1,4 +1,4 @@
-/* Reset Browswer Defaults */
+/* Reset Browser Defaults */
 * {
 	margin: 0;
 	padding: 0;
@@ -11,11 +11,24 @@
     src: url(Akkurat.otf)
 }
 
-/* Navigation */
+/* Layout Frames */
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
 .nav {
+    position: relative;
+    width: 100%;
+    height: 32px;
     background: lightslategray;
     font-size: 18px;
-    height: 36px;
 }
 
 .nav li {
@@ -34,4 +47,10 @@
 
 .nav a:hover {
 	color: yellow;
+}
+
+#window {
+    position: relative;
+    height: calc(100% - 32px);
+    background: lightslategray;
 }

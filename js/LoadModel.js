@@ -11,7 +11,7 @@ function initialize() {
         refreshToken: getToken
     };
 
-    var viewerElement = document.getElementById("viewer");
+    var viewerElement = document.getElementById("viewer3d");
     
     //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {}); //plain viewer
     var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); //viewer with toolbars
@@ -69,10 +69,10 @@ function getModel() {
     //var modelInt = e.options[e.selectedIndex].value;
     
     // Pull string value from URL
-    // http://app.sheetd.com/&part=1234
-    var urlPartNo = urlParam("part");
-    console.log("--> Part Number from URL: " + urlPartNo);
-    document.getElementById("PartNo").innerHTML = urlPartNo; //why is this italic??
+    // http://app.sheetd.com/?id=SMP_PNL_001
+    var urlPartNo = urlParam("id");
+    console.log("--> ID from URL: " + urlPartNo);
+    document.getElementById("id").innerHTML = urlPartNo;
     
     // Model Data JSON (eventual database connection or external JSON file)
     var models = '{ "models" : [' +
