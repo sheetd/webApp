@@ -70,9 +70,11 @@ function getModel() {
     
     // Pull string value from URL
     // http://app.sheetd.com/?id=SMP_PNL_001
-    var urlPartNo = urlParam("id");
-    console.log("--> ID from URL: " + urlPartNo);
-    document.getElementById("id").innerHTML = urlPartNo;
+    var urlId = urlParam("id");
+    if (urlId === "") urlId = "[None Selected]";
+    //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
+    $("#sId").html(urlId); //jQuery method
+    console.log("--> ID from URL: " + urlId);
     
     // Model Data JSON (eventual database connection or external JSON file)
     var models = '{ "models" : [' +

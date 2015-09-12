@@ -27,7 +27,7 @@ html, body {
     position: relative;
     width: 100%;
     height: 32px;
-    background: lightslategray;
+    background: yellow;
     font-size: 18px;
 }
 
@@ -46,11 +46,11 @@ html, body {
 }
 
 .nav a:hover {
-	color: yellow;
+	color: green;
 }
 
 #window {
     position: relative;
     height: calc(100% - 32px);
-    background: lightslategray;
+    background: yellow;
 }
