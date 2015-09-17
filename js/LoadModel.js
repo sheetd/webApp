@@ -31,7 +31,7 @@ function initialize() {
 
 function getToken() {
     //var theUrl = "http://" + location.hostname + ":5000/auth";//production
-    var theUrl = "http://app.sheetd.com:5000/auth";//testing
+    var theUrl = "http://api.sheetd.com:5000/auth";//testing
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false);
@@ -63,38 +63,46 @@ function loadDocument(viewer, documentId) {
     });
 }
 
-function getModel() {
+function getModel() {    
+    /*
     // Pull model # from pulldown
     //var e = document.getElementById("modelDropdown");
     //var modelInt = e.options[e.selectedIndex].value;
-    
-    // Pull string value from URL
-    // http://app.sheetd.com/?id=SMP_PNL_001
+
+    // Model Data JSON (eventual database connection or external JSON file)
+    var modelsTOREPLACE = '{ "models" : [' +
+        '{"id":"3M2_PNL_C03_001","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="},' +
+        '{"id":"BAM_PNL_D","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
+    console.log(modelsTOREPLACE);
+
+    // Parse models list
+    var modelInt = 0
+    var modelList = JSON.parse(models);
+    var id = modelList.models[modelInt].id;
+    var urn = modelList.models[modelInt].urn;
+    console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
+    return urn;
+    */
+
+    // Pull string value from URL: http://app.sheetd.com/?id=123456
     var urlId = urlParam("id");
     if (urlId === "") urlId = "[None Selected]";
     //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
     $("#sId").html(urlId); //jQuery method
     console.log("--> ID from URL: " + urlId);
-    
-    // Model Data JSON (eventual database connection or external JSON file)
-    var models = '{ "models" : [' +
-        '{"label":"D-SET Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="},' +
-        '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
 
-    // Parse models list
-    var modelInt = 0
-    var modelSelection = JSON.parse(models);
-    var label = modelSelection.models[modelInt].label;
-    var urn = modelSelection.models[modelInt].urn;
-    console.log("--> Loading Model" + "\n" + "--> label: " + label + "\n" + "--> urn: " + urn);
-    return urn;
-}
+    // TO DO: Pull external JSON file in to array
+    var models = $.getJSON("models.json", function(data) {
+        var output = [];
+        for (var i in models.id) {
+            output += data.id[i];
+        }
+    });
 
-// Generic test function
-function testFunction() {
-    // Send string to the console
-    testFunction.option1 = "--> Test Function";
-    console.log(testFunction.option1);
+    console.log(models);
+
+    // TO DO: Parse model list and return urn
+
 }
 
 // Pull string value from URL
