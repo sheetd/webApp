@@ -92,22 +92,16 @@ function getModel() {
     console.log("--> ID from URL: " + urlId);
 
     // Pull external JSON file in to array NOT WORKING
-    var models = $.getJSON("models.json", function(result) {
-       var jsonString = JSON.stringify(result); 
+    var modelArray = [];
+    var id = null;
+    var urn = null;
+    $.getJSON("models.json", function (data) {
+        modelArray = $.parseJSON(data).models;
+        id = modelArray.models[0].id;
+        urn = modelArray.models[0].urn;
+        console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
     });
-    console.log(models);
-    
-    // TO DELETE
-    var modelsOld = '{ "models" : [' +
-        '{"id":"3M2_PNL_C03_001","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="},' +
-        '{"id":"BAM_PNL_D","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
-    console.log(modelsOld);
-    
-    // Parse model list and return urn
-    var modelList = JSON.parse(models);
-    var id = modelList[0].id;
-    var urn = modelList[0].urn;
-    console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
+
     return urn;
 }
 
