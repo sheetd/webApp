@@ -93,33 +93,18 @@ function getModel() {
     $("#sId").html(urlId); //jQuery method
     console.log("--> ID from URL: " + urlId);
 
-    /*
     // Parse external JSON file - NOT WORKING
     var modelArray = null;
     var id = null;
     var urn = null;
     $.getJSON("models.json", function (data) {
-        modelArray = $.parseJSON(data).models;
+        modelArray = $.parseJSON(data);
         id = modelArray.models[0].id;
         urn = modelArray.models[0].urn;
         console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
     });
-    */
-    
-    var modelArray = [];
-    $.ajax({
-        url: "models.json",
-        dataType: "json",
-        async: false,
-        success: function (data) {
-            modelArray = $.parseJSON(data).models;
-            console.log(modelArray);
-        }
-    });
-     
-    //var id = modelArray[0].id;
-    var urn = modelArray[0].url;
 
+    urn = "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="
     return urn;
 }
 
