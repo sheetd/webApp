@@ -94,22 +94,18 @@ function getModel() {
     console.log("--> ID from URL: " + urlId);
 
     // Parse external JSON file - NOT WORKING
-    var modelArray = null;
-    var id = null;
-    var urn = null;
+    var modelInt = 0
     $.getJSON("models.json", function (data) {
-        modelArray = $.parseJSON(data);
-        id = modelArray.models[0].id;
-        urn = modelArray.models[0].urn;
+        var id = data[modelInt].id;
+        var urn = data[modelInt].urn;
         console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
     });
 
-    urn = "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="
-    return urn;
+    //return urn;
 }
 
-// Extract string value from URL
-function urlParam(name, w) {
+// Utility
+function urlParam(name, w) { // Extract string value from URL
     w = w || window;
     var rx = new RegExp('[\&|\?]' + name + '=([^\&\#]+)'),
         val = w.location.search.match(rx);
