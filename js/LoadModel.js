@@ -86,13 +86,16 @@ function getModel() {
 
     // Pull string value from URL: http://app.sheetd.com/?id=123456
     var urlId = urlParam("id");
-    if (urlId === "") urlId = "[None Selected]";
+    if (urlId === "") {
+        urlId = "[None Selected]";
+    }
     //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
     $("#sId").html(urlId); //jQuery method
     console.log("--> ID from URL: " + urlId);
 
-    // Pull external JSON file in to array NOT WORKING
-    var modelArray = [];
+    /*
+    // Parse external JSON file - NOT WORKING
+    var modelArray = null;
     var id = null;
     var urn = null;
     $.getJSON("models.json", function (data) {
@@ -101,12 +104,27 @@ function getModel() {
         urn = modelArray.models[0].urn;
         console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
     });
+    */
+    
+    var modelArray = [];
+    $.ajax({
+        url: "models.json",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            modelArray = $.parseJSON(data).models;
+            console.log(modelArray);
+        }
+    });
+     
+    //var id = modelArray[0].id;
+    var urn = modelArray[0].url;
 
     return urn;
 }
 
 // Extract string value from URL
-var urlParam = function (name, w) {
+function urlParam(name, w) {
     w = w || window;
     var rx = new RegExp('[\&|\?]' + name + '=([^\&\#]+)'),
         val = w.location.search.match(rx);
