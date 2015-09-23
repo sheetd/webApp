@@ -2,8 +2,40 @@
 // 3D Model Loader
 //----------------------------------------------------- 
 
-function initialize() {
-    // Initialize 3d viewer
+// Initialize (when DOM assembled)
+$(document).ready(function() {
+    processUI();
+    initialize3d();
+})
+
+// Process user interface
+function processUI() {
+    // Pull string value from URL, ex.: http://app.sheetd.com/?id=123456
+    var urlId = urlParam("id");
+    if (urlId === "") {
+        urlId = "[None Selected]";
+    };
+
+    //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
+    $("#sId").html(urlId); //jQuery method
+    console.log("--> ID from URL: " + urlId);
+
+    // Load model based on index
+    modelInt = 0;
+    getModel(modelInt);
+}
+
+function getModel(modelInt) {
+    $.getJSON("models.json", function (data) {
+        var id = data[modelInt].id;
+        var urn = data[modelInt].urn;
+        console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
+        return urn;
+    });
+}
+
+// Initialize 3d viewer
+function initialize3d() { 
     var options = {
         document: getModel(),
         env: "AutodeskProduction",
@@ -12,21 +44,20 @@ function initialize() {
     };
 
     var viewerElement = document.getElementById("viewer3d");
-    
+
     //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {}); //plain viewer
     var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); //viewer with toolbars
 
     Autodesk.Viewing.Initializer(options, function () {
         viewer.start();
-        
+
         // View preferences - 'Riverbank' render setting
         viewer.impl.setLightPreset(8);
-        
+
         // TO DO: additional viewer settings  
-        
+
         loadDocument(viewer, options.document);
     });
-
 }
 
 function getToken() {
@@ -47,8 +78,8 @@ function getToken() {
     return token;
 }
 
-function loadDocument(viewer, documentId) {  
-    // Find the first 3d geometry and load that.
+// Find the first 3d geometry and load that.
+function loadDocument(viewer, documentId) {
     Autodesk.Viewing.Document.load(documentId, function (doc) {// onLoadCallback
         var geometryItems = [];
         geometryItems = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
@@ -63,7 +94,8 @@ function loadDocument(viewer, documentId) {
     });
 }
 
-function getModel() {    
+// Get model URN
+function getModelOLD() {
     /*
     // Pull model # from pulldown
     var e = document.getElementById("modelDropdown");
@@ -83,25 +115,6 @@ function getModel() {
     console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
     return urn;
     */
-
-    // Pull string value from URL: http://app.sheetd.com/?id=123456
-    var urlId = urlParam("id");
-    if (urlId === "") {
-        urlId = "[None Selected]";
-    }
-    //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
-    $("#sId").html(urlId); //jQuery method
-    console.log("--> ID from URL: " + urlId);
-
-    // Parse external JSON file - NOT WORKING
-    var modelInt = 0
-    $.getJSON("models.json", function (data) {
-        var id = data[modelInt].id;
-        var urn = data[modelInt].urn;
-        console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
-    });
-
-    //return urn;
 }
 
 // Utility
