@@ -21,10 +21,11 @@ function processUI() {
     console.log("--> ID from URL: " + urlId);
 
     // Load model based on index
-    modelInt = 0;
+    var modelInt = 0;
     getModel(modelInt);
 }
 
+// Get model URN
 function getModel(modelInt) {
     $.getJSON("models.json", function (data) {
         var id = data[modelInt].id;
