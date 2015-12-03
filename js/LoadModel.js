@@ -37,8 +37,8 @@ function processUI() {
 // Initialize 3d viewer
 function initialize3d() {
     var options = {
-        document: urn,  // NOT WORKING - initialize3D running before processUI?!?!
-        //document: "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=",
+        //document: urn,  // NOT WORKING - initialize3D running before processUI?!?!
+        document: "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=",
         env: "AutodeskProduction",
         getAccessToken: getToken, //why not getToken(), instead?
         refreshToken: getToken
