@@ -1,9 +1,12 @@
-//----------------------------------------------------- 
+//-----------------------------------------------------
 // 3D Model Loader
-//----------------------------------------------------- 
+//-----------------------------------------------------
+
+// Globals
+var urn = null;
 
 // Initialize (when DOM assembled)
-$(document).ready(function() {
+$(document).ready(function () {
     processUI();
     initialize3d();
 })
@@ -16,33 +19,34 @@ function processUI() {
         urlId = "[None Selected]";
     };
 
+    // Put model ID in the header
     //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
     $("#sId").html(urlId); //jQuery method
-    console.log("--> ID from URL: " + urlId);
+    console.log("1 --> id from URL: " + urlId);
 
-    // Load model based on index
+    // Model selection
     var modelInt = 0;
-    getModel(modelInt);
-}
 
-// Get model URN
-function getModel(modelInt) {
+    // Get model URN from external JSON file
     $.getJSON("models.json", function (data) {
-        var id = data[modelInt].id;
-        var urn = data[modelInt].urn;
-        console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
-        return urn;
+        urn = data[modelInt].urn;
+        console.log("2 --> urn: " + urn);
     });
 }
 
 // Initialize 3d viewer
-function initialize3d() { 
+function initialize3d() {
     var options = {
-        document: getModel(),
+        document: urn,  // NOT WORKING - initialize3D running before processUI?!?!
+        //document: "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=",
         env: "AutodeskProduction",
         getAccessToken: getToken, //why not getToken(), instead?
         refreshToken: getToken
     };
+
+    // TESTING
+    console.log("3 -->" + urn)
+    console.log("4 -->" + options)
 
     var viewerElement = document.getElementById("viewer3d");
 
@@ -61,6 +65,7 @@ function initialize3d() {
     });
 }
 
+// Utility Functions
 function getToken() {
     //var theUrl = "http://" + location.hostname + ":5000/auth";//production
     var theUrl = "http://api.sheetd.com:5000/auth";//testing
@@ -79,7 +84,6 @@ function getToken() {
     return token;
 }
 
-// Find the first 3d geometry and load that.
 function loadDocument(viewer, documentId) {
     Autodesk.Viewing.Document.load(documentId, function (doc) {// onLoadCallback
         var geometryItems = [];
@@ -95,30 +99,6 @@ function loadDocument(viewer, documentId) {
     });
 }
 
-// Get model URN
-function getModelOLD() {
-    /*
-    // Pull model # from pulldown
-    var e = document.getElementById("modelDropdown");
-    var modelInt = e.options[e.selectedIndex].value;
-
-    // Model Data JSON (eventual database connection or external JSON file)
-    var models = '{ "models" : [' +
-        '{"id":"3M2_PNL_C03_001","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="},' +
-        '{"id":"BAM_PNL_D","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
-    console.log(models);
-
-    // Parse models list
-    var modelInt = 0
-    var modelList = JSON.parse(models);
-    var id = modelList.models[modelInt].id;
-    var urn = modelList.models[modelInt].urn;
-    console.log("--> Loading Model" + "\n" + "--> ID: " + id + "\n" + "--> urn: " + urn);
-    return urn;
-    */
-}
-
-// Utility
 function urlParam(name, w) { // Extract string value from URL
     w = w || window;
     var rx = new RegExp('[\&|\?]' + name + '=([^\&\#]+)'),
