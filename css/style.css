@@ -1,9 +1,9 @@
-/* Reset Browswer Defaults */
+/* Reset Browser Defaults */
 * {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-family: akkurat;
+    font-family: akkurat;
 }
 
 @font-face {
@@ -11,34 +11,46 @@
     src: url(Akkurat.otf)
 }
 
-/* Navigation */
+/* Layout Frames */
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
 .nav {
-	position: absolute;
-	font-size: 18px;
-	z-index: 2;
-	padding: 10px 0px 0px 5px;
+    position: relative;
+    width: 100%;
+    height: 32px;
+    background: yellow;
+    font-size: 18px;
 }
 
 .nav li {
-	display: inline;
-	padding: 5px;
-	background: lightslategray;
+	display: inline-block;
+    padding: 5px;
+}
+
+.nav li:first-child {
+	font-weight: Bold;
 }
 
 .nav a {
-	background: lightslategray;
 	text-decoration: none;
 	color: black;
 }
 
 .nav a:hover {
-	color: yellow;
+	color: green;
 }
 
-/* Viewer */
-#viewer {
-	position: absolute;
-	width: 100%; 
-	height: 100%;
-	z-index: 1;
+#window {
+    position: relative;
+    height: calc(100% - 32px);
+    background: yellow;
 }

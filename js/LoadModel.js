@@ -1,39 +1,74 @@
-//----------------------------------------------------- 
+//-----------------------------------------------------
 // 3D Model Loader
-//----------------------------------------------------- 
+//-----------------------------------------------------
 
-function initialize() {
-    // Initialize 3d viewer
+// Globals
+var urn = null;
+
+// Initialize (when DOM assembled)
+$(document).ready(function () {
+    processUI();
+    initialize3d();
+})
+
+// Process user interface
+function processUI() {
+    // Pull string value from URL, ex.: http://app.sheetd.com/?id=123456
+    var urlId = urlParam("id");
+    if (urlId === "") {
+        urlId = "[None Selected]";
+    };
+
+    // Put model ID in the header
+    //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
+    $("#sId").html(urlId); //jQuery method
+    console.log("1 --> id from URL: " + urlId);
+
+    // Model selection
+    var modelInt = 0;
+
+    // Get model URN from external JSON file
+    $.getJSON("models.json", function (data) {
+        urn = data[modelInt].urn;
+        console.log("2 --> urn: " + urn);
+    });
+}
+
+// Initialize 3d viewer
+function initialize3d() {
     var options = {
-        document: getModel(),
+        //document: urn,  // NOT WORKING - initialize3D running before processUI?!?!
+        document: "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=",
         env: "AutodeskProduction",
         getAccessToken: getToken, //why not getToken(), instead?
         refreshToken: getToken
     };
 
-    var viewerElement = document.getElementById("viewer");
-    
+    // TESTING
+    console.log("3 -->" + urn)
+    console.log("4 -->" + options)
+
+    var viewerElement = document.getElementById("viewer3d");
+
     //var viewer = new Autodesk.Viewing.Viewer3D(viewerElement, {}); //plain viewer
     var viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerElement, {}); //viewer with toolbars
 
     Autodesk.Viewing.Initializer(options, function () {
         viewer.start();
-        
-        // View preferences - 'Riverbank' render seting
+
+        // View preferences - 'Riverbank' render setting
         viewer.impl.setLightPreset(8);
-        
+
         // TO DO: additional viewer settings  
-        
+
         loadDocument(viewer, options.document);
     });
-    
-    // Testing
-    //testFunction();
 }
 
+// Utility Functions
 function getToken() {
     //var theUrl = "http://" + location.hostname + ":5000/auth";//production
-    var theUrl = "http://app.sheetd.com:5000/auth";//testing
+    var theUrl = "http://api.sheetd.com:5000/auth";//testing
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false);
@@ -49,8 +84,7 @@ function getToken() {
     return token;
 }
 
-function loadDocument(viewer, documentId) {  
-    // Find the first 3d geometry and load that.
+function loadDocument(viewer, documentId) {
     Autodesk.Viewing.Document.load(documentId, function (doc) {// onLoadCallback
         var geometryItems = [];
         geometryItems = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), {
@@ -65,38 +99,7 @@ function loadDocument(viewer, documentId) {
     });
 }
 
-function getModel() {
-    // Pull model # from pulldown
-    var e = document.getElementById("modelDropdown");
-    var modelInt = e.options[e.selectedIndex].value;
-    
-    // Pull string value from URL (for future use as web service)
-    // http://app.sheetd.com/index.html&urn=1234
-    var urlUrn = urlParam("urn");
-    console.log("--> urn from URL: " + urlUrn);
-    
-    // Model Data JSON (eventual database connection or external JSON file)
-    var models = '{ "models" : [' +
-        '{"label":"D-SET Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ="},' +
-        '{"label":"BAMPFA Panel","urn":"urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6c2hlZXQuYnVja2V0L0JBTV9QTkxfUjA3LTAxLkNBVFBhcnQ="}]}';
-
-    // Parse models list
-    var modelSelection = JSON.parse(models);
-    var name = modelSelection.models[modelInt].label;
-    var urn = modelSelection.models[modelInt].urn;
-    console.log("--> Loading Model" + "\n" + "--> name: " + name + "\n" + "--> urn: " + urn);
-    return urn;
-}
-
-// Generic test function
-function testFunction() {
-    // Send string to the console
-    testFunction.option1 = "--> Test Function";
-    console.log(testFunction.option1);
-}
-
-// Pull string value from URL
-var urlParam = function (name, w) {
+function urlParam(name, w) { // Extract string value from URL
     w = w || window;
     var rx = new RegExp('[\&|\?]' + name + '=([^\&\#]+)'),
         val = w.location.search.match(rx);
