@@ -27,26 +27,34 @@ function processUI() {
     // Model selection
     var modelInt = 0;
 
-    // Get model URN from external JSON file
-    $.getJSON("models.json", function (data) {
-        urn = data[modelInt].urn;
-        console.log("2 --> urn: " + urn);
+    //Get model URN from external JSON file
+    $.ajax({
+        type: "GET",
+        url: "models.json",
+        dataType: "json",
+        success: function (data) {
+            urn = data[modelInt].urn;
+            console.log("2 --> urn: " + urn);
+        },
+        data: {},
+        async: false
     });
+
+    // TO DO: update to async method
+    //$.getJSON("models.json", function (data) {
+    //    urn = data[modelInt].urn;
+    //    console.log("2 --> urn: " + urn);
+    //});
 }
 
 // Initialize 3d viewer
 function initialize3d() {
     var options = {
-        //document: urn,  // NOT WORKING - initialize3D running before processUI?!?!
-        document: "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=",
+        document: urn,
         env: "AutodeskProduction",
         getAccessToken: getToken, //why not getToken(), instead?
         refreshToken: getToken
     };
-
-    // TESTING
-    console.log("3 -->" + urn)
-    console.log("4 -->" + options)
 
     var viewerElement = document.getElementById("viewer3d");
 
