@@ -3,6 +3,7 @@
 //-----------------------------------------------------
 
 // Globals
+//"use strict";
 var urn = null;
 
 // Initialize (when DOM assembled)
@@ -27,26 +28,39 @@ function processUI() {
     // Model selection
     var modelInt = 0;
 
-    // Get model URN from external JSON file
-    $.getJSON("models.json", function (data) {
-        urn = data[modelInt].urn;
-        console.log("2 --> urn: " + urn);
+    //Get model URN from external JSON file
+    $.ajax({
+        type: "GET",
+        url: "models.json",
+        dataType: "json",
+        success: function (data) {
+            urn = data[modelInt].urn;
+            console.log("2 --> urn: " + urn)
+        },
+        data: {},
+        async: false
     });
+    
+    // TO DO: update to async method
+    //$.getJSON("models.json", function (data) {
+    //    urn = data[modelInt].urn;
+    //    console.log("2 --> urn: " + urn);
+    //});
+    
+    // TO DO: populate pull down from JSON
+    
+    
+    
 }
 
 // Initialize 3d viewer
 function initialize3d() {
     var options = {
-        //document: urn,  // NOT WORKING - initialize3D running before processUI?!?!
-        document: "urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bm1fYnVja2V0L01HTV9EU1RfUGFuZWxMLkNBVFBhcnQ=",
+        document: urn,
         env: "AutodeskProduction",
-        getAccessToken: getToken, //why not getToken(), instead?
+        getAccessToken: getToken,
         refreshToken: getToken
     };
-
-    // TESTING
-    console.log("3 -->" + urn)
-    console.log("4 -->" + options)
 
     var viewerElement = document.getElementById("viewer3d");
 
@@ -99,7 +113,8 @@ function loadDocument(viewer, documentId) {
     });
 }
 
-function urlParam(name, w) { // Extract string value from URL
+// Extract string value from URL
+function urlParam(name, w) {
     w = w || window;
     var rx = new RegExp('[\&|\?]' + name + '=([^\&\#]+)'),
         val = w.location.search.match(rx);
