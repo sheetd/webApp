@@ -3,6 +3,7 @@
 //-----------------------------------------------------
 
 // Globals
+//"use strict";
 var urn = null;
 
 // Initialize (when DOM assembled)
@@ -34,17 +35,22 @@ function processUI() {
         dataType: "json",
         success: function (data) {
             urn = data[modelInt].urn;
-            console.log("2 --> urn: " + urn);
+            console.log("2 --> urn: " + urn)
         },
         data: {},
         async: false
     });
-
+    
     // TO DO: update to async method
     //$.getJSON("models.json", function (data) {
     //    urn = data[modelInt].urn;
     //    console.log("2 --> urn: " + urn);
     //});
+    
+    // TO DO: populate pull down from JSON
+    
+    
+    
 }
 
 // Initialize 3d viewer
@@ -52,7 +58,7 @@ function initialize3d() {
     var options = {
         document: urn,
         env: "AutodeskProduction",
-        getAccessToken: getToken, //why not getToken(), instead?
+        getAccessToken: getToken,
         refreshToken: getToken
     };
 
@@ -107,7 +113,8 @@ function loadDocument(viewer, documentId) {
     });
 }
 
-function urlParam(name, w) { // Extract string value from URL
+// Extract string value from URL
+function urlParam(name, w) {
     w = w || window;
     var rx = new RegExp('[\&|\?]' + name + '=([^\&\#]+)'),
         val = w.location.search.match(rx);
