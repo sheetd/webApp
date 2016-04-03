@@ -36,12 +36,17 @@ function processUI() {
         success: function (data) {
             urn = data[modelInt].urn;
             console.log("2 --> urn: " + urn)
+            //------------------
+            console.log("--> Model: " + data[modelInt].id);
+            var listModel = data[modelInt].id;
+            $("#partDropdown").append(new Option(listModel, modelInt));
+            //------------------
         },
         data: {},
         async: false
     });
     
-    // TO DO: update to async method
+    // TO DO: get model URN using async method
     //$.getJSON("models.json", function (data) {
     //    urn = data[modelInt].urn;
     //    console.log("2 --> urn: " + urn);
