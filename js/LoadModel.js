@@ -5,6 +5,7 @@
 // Globals
 //"use strict";
 var urn = null;
+var modelList = null;
 
 // Initialize (when DOM assembled)
 $(document).ready(function () {
@@ -14,6 +15,7 @@ $(document).ready(function () {
 
 // Process user interface
 function processUI() {
+    /* 
     // Pull string value from URL, ex.: http://app.sheetd.com/?id=123456
     var urlId = urlParam("id");
     if (urlId === "") {
@@ -24,38 +26,32 @@ function processUI() {
     //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
     $("#sId").html(urlId); //jQuery method
     console.log("1 --> id from URL: " + urlId);
-
-    // Model selection
+    */
+    
+    // Process JSON model list
     var modelInt = 0;
-
-    //Get model URN from external JSON file
     $.ajax({
         type: "GET",
         url: "models.json",
         dataType: "json",
         success: function (data) {
             urn = data[modelInt].urn;
-            console.log("2 --> urn: " + urn)
-            //------------------
-            console.log("--> Model: " + data[modelInt].id);
-            var listModel = data[modelInt].id;
-            $("#partDropdown").append(new Option(listModel, modelInt));
-            //------------------
+            modelList = data
         },
         data: {},
         async: false
     });
-    
+        
     // TO DO: get model URN using async method
     //$.getJSON("models.json", function (data) {
     //    urn = data[modelInt].urn;
     //    console.log("2 --> urn: " + urn);
-    //});
+    //});  
     
-    // TO DO: populate pull down from JSON
-    
-    
-    
+    // Append model list to pulldown
+    for (i = 0; i < modelList.length; i++) {
+        $("#partDropdown").append(new Option(modelList[i].id, i));
+    }  
 }
 
 // Initialize 3d viewer
