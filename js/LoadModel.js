@@ -11,6 +11,7 @@ var modelList = null;
 $(document).ready(function () {
     processUI();
     initialize3d();
+    changeModel();
 })
 
 // Process user interface
@@ -46,12 +47,12 @@ function processUI() {
     //$.getJSON("models.json", function (data) {
     //    urn = data[modelInt].urn;
     //    console.log("2 --> urn: " + urn);
-    //});  
+    //});   
     
     // Append model list to pulldown
     for (i = 0; i < modelList.length; i++) {
         $("#partDropdown").append(new Option(modelList[i].id, i));
-    }  
+    };
 }
 
 // Initialize 3d viewer
@@ -77,6 +78,15 @@ function initialize3d() {
         // TO DO: additional viewer settings  
 
         loadDocument(viewer, options.document);
+    });
+}
+
+// Change model selection from pulldown
+function changeModel() {
+    $("#partDropdown").change(function () {
+        var i = $("#partDropdown").val();
+        urn = modelList[i].urn;
+        initialize3d();
     });
 }
 
