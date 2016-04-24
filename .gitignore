@@ -1,3 +1,3 @@
 # node and npm stuff
-js/node_modules/*
+node_modules/*
 Web.config
