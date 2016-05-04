@@ -52,7 +52,7 @@ function getAuthCode(mainResponse, baseUrl, clientId, clientSecret) {
 }
 
 // these are the URLs the browser based app will send to us to get the token.  Send one appropriate for the
-// given environment.  If you only have keys for the PRODUCTION environment, then just replace those below,
+// given environment. If you only have keys for the PRODUCTION environment, then just replace those below,
 // otherwise you can replace them all and easily switch environments from your browser app.
 
 app.get("/auth", function(req, res) {

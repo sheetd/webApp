@@ -4,7 +4,6 @@
   "description": "Testing site for 3D based web application using the Autodesk \"View and Data API.\"",
   "main": "index.html",
   "dependencies": {
-    "bootstrap": "^3.3.6",
     "express": "^4.13.4",
     "https": "^1.0.0"
   },
@@ -16,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/sheetd/webApp.git"
   },
-  "author": "",
+  "author": "Neil Meredith <neil@sheetd.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sheetd/webApp/issues"
