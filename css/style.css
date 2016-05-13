@@ -52,5 +52,5 @@ html, body {
 #window {
     position: relative;
     height: calc(100% - 32px);
-    background: yellow;
+    background: lightgrey;
 }
