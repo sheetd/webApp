@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 // Process user interface
 function processUI() {
-    /* 
+    /*
     // Pull string value from URL, ex.: http://app.sheetd.com/?id=123456
     var urlId = urlParam("id");
     if (urlId === "") {
@@ -24,11 +24,11 @@ function processUI() {
     };
 
     // Put model ID in the header
-    //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)      
+    //document.getElementById("sId").innerHTML = urlId; //js method (deprecated)
     $("#sId").html(urlId); //jQuery method
     console.log("1 --> id from URL: " + urlId);
     */
-    
+
     // Process JSON model list
     var modelInt = 0;
     $.ajax({
@@ -42,13 +42,13 @@ function processUI() {
         data: {},
         async: false
     });
-        
+
     // TO DO: get model URN using async method
     //$.getJSON("models.json", function (data) {
     //    urn = data[modelInt].urn;
     //    console.log("2 --> urn: " + urn);
-    //});   
-    
+    //});
+
     // Append model list to pulldown
     for (i = 0; i < modelList.length; i++) {
         $("#partDropdown").append(new Option(modelList[i].id, i));
@@ -75,7 +75,7 @@ function initialize3d() {
         // View preferences - 'Riverbank' render setting
         viewer.impl.setLightPreset(8);
 
-        // TO DO: additional viewer settings  
+        // TO DO: additional viewer settings
 
         loadDocument(viewer, options.document);
     });

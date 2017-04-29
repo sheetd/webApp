@@ -1,6 +1,6 @@
-//----------------------------------------------------- 
+//-----------------------------------------------------
 // Authentication Token Server
-//----------------------------------------------------- 
+//-----------------------------------------------------
 
 var https = require("https");
 var express = require("express");
@@ -12,7 +12,7 @@ var app = express();
 // the token.
 
 function getAuthCode(mainResponse, baseUrl, clientId, clientSecret) {
-	var dataString = "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials";
+	var dataString = "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials&scope=data%3Aread+data%3Acreate+data%3Awrite+bucket%3Aread+bucket%3Acreate";
 
     var headers = {
         "Content-Type": "application/x-www-form-urlencoded"
